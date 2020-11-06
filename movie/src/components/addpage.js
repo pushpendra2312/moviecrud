@@ -10,7 +10,6 @@ function AddMovies() {
 
   function addMovies(e) {
     e.preventDefault();
-    // const newOrder_id = order_id + 1;
     const movies = {
       movie_name, movie_duration, movie_rating, movie_year
     }
