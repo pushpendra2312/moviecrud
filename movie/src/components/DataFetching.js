@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 function DataFetching() {
     const [movies, setMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    // const [editing, setEditing] = useState(false);
     const searchMovies = movies.filter((movie) => {
         return movie.movie_name.includes(searchTerm);
     });
@@ -14,7 +16,6 @@ function DataFetching() {
             setMovies(res.data);
         }).catch(err => { console.error(err) })
     }, []);
-
 
 
     function DeleteFunction(ele) {
@@ -43,10 +44,12 @@ function DataFetching() {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
+                            <th>SN</th>
                             <th>Name</th>
                             <th>Duration</th>
                             <th>Rating</th>
                             <th>Year</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,11 +59,17 @@ function DataFetching() {
                             return (
                                 console.log(ele),
                                 <tr key={index} ele={ele.id}>
+                                    <td>{index + 1}</td>
                                     <td>{ele.movie_name}</td>
                                     <td>{ele.movie_duration}</td>
                                     <td>{ele.movie_rating}</td>
                                     <td>{ele.movie_year}</td>
-                                    <button onClick={() => DeleteFunction(ele)} >Delete</button>
+                                    <td><Button onClick={() => DeleteFunction(ele)} >Delete</Button>
+                                        {'  '}
+                                        <Link to={`editpage/${ele.id}`}>
+                                            <Button>Edit</Button>
+                                        </Link>
+                                    </td>
                                 </tr>
                             );
                         }

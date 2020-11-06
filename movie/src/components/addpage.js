@@ -10,12 +10,17 @@ function AddMovies() {
 
   function addMovies(e) {
     e.preventDefault();
+
     const movies = {
       movie_name, movie_duration, movie_rating, movie_year
     }
     console.log(movies);
     axios.post('http://localhost:5002/add', movies)
       .then(res => console.log(res.data));
+    setmovieName('');
+    setmovieRating('');
+    setmovieYear('');
+    setmovieDuration('');
   }
   return (
     <Form onSubmit={addMovies}>
